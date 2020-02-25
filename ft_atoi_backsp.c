@@ -1,0 +1,81 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_atoi_backsp.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: btrifle <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/02/24 21:22:08 by btrifle           #+#    #+#             */
+/*   Updated: 2020/02/24 21:22:09 by btrifle          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "ps_header.h"
+
+/*
+** we return anything except NULL in case of success
+** a_r is address of res
+*/
+
+int		*cycle_in_atoi_backsp(const char *str, int *a_r, int *n, int *a_i)
+{
+	while (str[*a_i] >= '0' && str[*a_i] <= '9')
+	{
+		if (*a_r > INT_MAX / 10 || (*a_r == INT_MAX / 10 && str[*a_i] > '7'))
+		{
+			*n = -1;
+			return (NULL);
+		}
+		else
+			*a_r = *a_r * 10 + (str[*a_i] - '0');
+		(*a_i)++;
+	}
+	return (a_r);
+}
+
+/*
+** we return anything except NULL in case of success
+*/
+
+int		*str_end_in_atoi_backsp(const char *str_i, int *n)
+{
+	if (str_i == '\0')
+	{
+		*n = 0;
+		return (NULL);
+	}
+	return (n);
+}
+
+/*
+** if int parsed then we put to p_numb what was parsed
+** and return pointer to next char;
+** if int was overflowed then return NULL;
+*/
+
+char	*ft_atoi_backsp(const char *str, int *p_numb, int *n)
+{
+	int	i;
+	int	res;
+	int	sign;
+
+	res = 0;
+	sign = 1;
+	i = ft_cut_backspaces(str);
+	if (str[i] == '-')
+		sign = -1;
+	if (str[i] == '+' || str[i] == '-')
+		i++;
+	if (ft_strstr(str, "2147483648") && sign == -1)
+	{
+		*p_numb = -2147483648;
+		return ((char *)str + i + 10);
+	}
+	if (!(cycle_in_atoi_backsp(str, &res, n, &i)))
+		return (NULL);
+	*p_numb = sign * res;
+	if (!(str_end_in_atoi_backsp(str + i, n)))
+		return (NULL);
+	*n = 1;
+	return ((char *)str + i);
+}
