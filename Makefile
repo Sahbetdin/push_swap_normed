@@ -1,6 +1,7 @@
 
 CHECKER_NAME = checker
 PS_NAME = push_swap
+NAME = $(PS_NAME) $(CHECKER_NAME)
 
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
@@ -19,18 +20,21 @@ LIBFT = $(LIBFT_PATH)/libft.a
 
 RED = "\033[0;31m"
 GREEN = "\033[0;32m"
+WHITE_B = "\033[1m"
 WHITE = "\033[0m"
 
 .PHONY: all clean fclean re
 
-all: $(PS_NAME)
+all: $(NAME)
 
-$(PS_NAME): $(LIBFT) $(OBJECTS)
+$(NAME): $(LIBFT) $(OBJECTS)
 		@$(CC) $(CFLAGS) -o $(PS_NAME) push_swap.c $(OBJECTS) -I $(LIBFT_PATH) -L $(LIBFT_PATH) -lft
+		@echo $(WHITE_B) push_swap $(WHITE)created. 
 		@$(CC) $(CFLAGS) -o $(CHECKER_NAME) checker.c $(OBJECTS) -I $(LIBFT_PATH) -L $(LIBFT_PATH) -lft
+		@echo $(WHITE_B) checker $(WHITE)created. 
 
-$(OBJECTS): %.o: %.c
-		@$(CC) $(CFLAGS) -I $(HEADER) -o $@ -c $<
+$(OBJECTS): %.o: %.c $(HEADER)
+		@$(CC) $(CFLAGS) -o $@ -c $< -I$(HEADER) 
 		@echo push_swap: $(GREEN) $< $(WHITE)
 
 $(LIBFT):

@@ -57,9 +57,13 @@ int		parse_complicated(int ac, char **av, t_stacks **st)
 int		set_st_a(int ac, char **av, t_stacks **st, int **sorted)
 {
 	int		cnt;
+	int		tmp;
 
-	if (check_if_num_backsp(ac, av) == 0)
+	tmp = check_if_num_backsp(ac, av);
+	if (tmp == 0)
 		return (-1);
+	else if (tmp == -1)
+		return (-4);
 	if (!(*st = (t_stacks *)malloc(sizeof(t_stacks))))
 		return (0);
 	if ((cnt = amount_of_numb(ac, av)) != -1)

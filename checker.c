@@ -29,7 +29,8 @@ void	run_gnl(t_stacks *st)
 	{
 		res = action(st, s, 0);
 		if (res != 1)
-			write(1, "BAD INPUT\n", 10);
+			exit(1);
+			// write(1, "BAD INPUT\n", 10);
 		free(s);
 	}
 	free(s);
@@ -40,15 +41,12 @@ int		main(int ac, char **av)
 	t_stacks	*st;
 	int			*sorted;
 	int			res;
-	int			*num;
 
-	if (!(num = (int *)malloc(sizeof(int) * 8)))
-		return (0);
-	st = NULL;
 	if (ac == 1)
 		return (0);
+	st = NULL;
 	res = set_st_a(ac, av, &st, &sorted);
-	if (bad_input(res, num) == 0)
+	if (bad_input(res) == 0)
 		return (0);
 	if (if_allocated_b(st) == 0)
 	{
@@ -57,6 +55,6 @@ int		main(int ac, char **av)
 	}
 	run_gnl(st);
 	if_ok(check_stacks(st));
-	free_stacks_after_checker(st, sorted, num);
+	free_stacks_after_checker(st, sorted);
 	return (0);
 }

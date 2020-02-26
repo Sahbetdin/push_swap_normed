@@ -28,7 +28,7 @@ void	free_stacks_after_success(t_stacks *st, t_info *pc, int *srt, int *num)
 	pc = NULL;
 }
 
-void	free_stacks_after_checker(t_stacks *st, int *srt, int *num)
+void	free_stacks_after_checker(t_stacks *st, int *srt)
 {
 	free(st->a);
 	free(st->b);
@@ -38,25 +38,25 @@ void	free_stacks_after_checker(t_stacks *st, int *srt, int *num)
 	st = NULL;
 	free(srt);
 	srt = NULL;
-	free(num);
-	num = NULL;
 }
 
-int		bad_input(int res, int *num)
+int		bad_input(int res)
 {
+	int g;
+
+	g = 0;
 	if (res == 0)
-		write(1, "\033[1;31mMalloc error in 'a'\n\033[0m", 24);
+		ft_printf("Malloc error in 'a'\n");
 	else if (res == -1)
-		write(1, "\033[1;31mNo numerical input\n\033[0m", 31);
+		ft_printf("Error\n");
 	else if (res == -2)
-		write(1, "\033[1;31mInteger overflaw\n\033[0m", 28);
+		ft_printf("Error\n");
 	else if (res == -3)
-		write(1, "\033[1;31mDuplicates found\n\033[0m", 28);
-	if (res == 0 || res == -1 || res == -2 || res == -3)
-	{
-		free(num);
+		ft_printf("Error\n");
+	else if (res == -4)
+		ft_printf("Error\n");
+	if (res == 0 || res == -1 || res == -2 || res == -3 || res == -4)
 		return (0);
-	}
 	return (1);
 }
 
@@ -67,7 +67,7 @@ int		if_allocated_b(t_stacks *st)
 	res = set_st_b(st);
 	if (res == 0)
 	{
-		write(1, "\033[1;31mMalloc error in 'b'\n\033[0m", 24);
+		ft_printf("Malloc error in 'b'\n");
 		st->b = NULL;
 		free(st->a);
 		st->a = NULL;
