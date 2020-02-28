@@ -86,7 +86,8 @@ void	sort_4_elements(t_stacks *st, t_info *pc0, int *srt)
 
 	k = 0;
 	if (pc0->lt == 'A' && pc0->amount + st->pa == st->n)
-		sort_4_only(st, pc0, srt);
+		// sort_4_only(st, pc0, srt); //prev
+		sort_4_only(st, srt);
 	else if (pc0->lt == 'A')
 		sort_4_a(st, pc0, srt);
 	else if (pc0->lt == 'B')

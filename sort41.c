@@ -32,24 +32,50 @@ void	zerofy_piece(t_info *pc0)
 	pc0->amount = 0;
 }
 
-void	sort_4_only(t_stacks *st, t_info *pc0, int *srt)
+//previous veriosn
+// void	sort_4_only(t_stacks *st, t_info *pc0, int *srt)
+// {
+// 	if (st->a[st->pa + 1] == srt[pc0->begin])
+// 		action(st, "sa", 1);
+// 	if (st->a[st->pa] == srt[pc0->begin])
+// 	{
+// 		action(st, "ra", 1);
+// 		sort_3_for_4(st, srt[pc0->begin + 1]);
+// 		action(st, "rra", 1);
+// 	}
+// 	else if (st->a[st->pa + 2] == srt[pc0->begin])
+// 		action(st, "rra", 1);
+// 	if (st->a[st->pa + 3] == srt[pc0->begin])
+// 	{
+// 		sort_3_for_4(st, srt[pc0->begin + 1]);
+// 		action(st, "rra", 1);
+// 	}
+// }
+
+void	sort_4_only(t_stacks *st, int *srt)
 {
-	if (st->a[st->pa + 1] == srt[pc0->begin])
+	if (st->a[st->pa + 1] == srt[0])
 		action(st, "sa", 1);
-	if (st->a[st->pa] == srt[pc0->begin])
+	if (st->a[st->pa] == srt[0])
 	{
-		action(st, "ra", 1);
-		sort_3_for_4(st, srt[pc0->begin + 1]);
-		action(st, "rra", 1);
+		action(st, "pb", 1);
+		sort_3_a_alone(st, srt);
+		action(st, "pa", 1);
 	}
-	else if (st->a[st->pa + 2] == srt[pc0->begin])
-		action(st, "rra", 1);
-	if (st->a[st->pa + 3] == srt[pc0->begin])
+	else if (st->a[st->pa + 2] == srt[0]) //changed 28th feb
+{
+	action(st, "ra", 1);
+	action(st, "ra", 1);
+	action(st, "pb", 1);
+}
+		
+	if (st->a[st->pa + 3] == srt[0])
 	{
-		sort_3_for_4(st, srt[pc0->begin + 1]);
+		sort_3_for_4(st, srt[1]);
 		action(st, "rra", 1);
 	}
 }
+
 
 void	sort_3_for_4(t_stacks *st, int min2)
 {

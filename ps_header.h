@@ -168,7 +168,9 @@ void			sort_4_elements(t_stacks *st, t_info *pc0, int *srt);
 */
 
 void			sort_top_top(t_stacks *st);
-void			sort_3_a_alone(t_stacks *st, t_info *pc0, int *srt);
+//void			sort_3_a_alone(t_stacks *st, t_info *pc0, int *srt);
+void	sort_3_a_alone(t_stacks *st, int *srt);
+
 void			sort_3_a_not_alone(t_stacks *st, t_info *pc0, int *srt);
 void			sort_3_b(t_stacks *st, t_info *pc0, int *srt);
 void			sort_3_elements(t_stacks *st, t_info *pc0, int *srt);
@@ -180,7 +182,7 @@ void			sort_3_elements(t_stacks *st, t_info *pc0, int *srt);
 void			rra_sa(t_stacks *st);
 void			pb_2(t_stacks *st);
 void			zerofy_piece(t_info *pc0);
-void			sort_4_only(t_stacks *st, t_info *pc0, int *srt);
+void			sort_4_only(t_stacks *st, int *srt);
 void			sort_3_for_4(t_stacks *st, int min2);
 
 /*

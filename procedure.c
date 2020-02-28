@@ -91,6 +91,19 @@ void	check_if_b_empty(t_info *pc_i_1, int *num)
 		num[3] = pc_i_1->amount;
 }
 
+void	sort_5(t_stacks *st, int *srt)
+{
+	if (st->a[st->pa + 1] == srt[0])
+		action(st, "sa", 1);
+	if (st->a[st->pa] == srt[0])
+	{
+		action(st, "pb", 1);
+		sort_4_only(st, srt);
+		action(st, "pa", 1);
+	}
+}
+
+
 /*
 ** num[0] = j; num[1] = count; num[2] = rot_cnt; num[3] = need_to_push;
 ** num[4] = flag; num[5] = flag1; num[6] = tmp; num[7] = k;
@@ -100,10 +113,16 @@ void	process_stacks(t_stacks *st, t_info *pc, int *sorted, int *num)
 {
 	int i;
 
+//возвр i 
+	if (st->n == 5)
+	{
+		sort_5(st, sorted);	
+	}
 	i = -1;
 	while (++i < 8)
 		num[i] = 0;
 	i = active_piece(pc);
+
 	if (pc[i].amount > 4)
 	{
 		num[1] = pc[i].amount;
