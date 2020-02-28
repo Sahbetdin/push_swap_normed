@@ -68,12 +68,12 @@ int		av_i_has_digit(char *av_i)
 ** otherwise returns 1
 */
 
-int		check_if_num_backsp(int ac, char **av)
+int		check_if_num_backsp(int ac, char **av, int start_av)
 {
 	int i;
 	int j;
 
-	i = 1;
+	i = start_av;
 	while (i < ac)
 	{
 		j = 0;
@@ -85,7 +85,7 @@ int		check_if_num_backsp(int ac, char **av)
 			j++;
 		}
 		if (ft_strlen(av[i]) == 0)
-			return(-1);
+			return (-1);
 		if (ft_strlen(av[i]) == 1 && (av[i][0] == '-' || av[i][0] == '+'))
 			return (-1);
 		if (inside_number_bad(av[i]) == 0)
@@ -113,8 +113,6 @@ int		check_if_dupl(t_stacks *st, int **srt)
 		{
 			free(st->a);
 			st->a = NULL;
-			free(st);
-			st = NULL;
 			free(*srt);
 			*srt = NULL;
 			return (-3);
@@ -122,33 +120,4 @@ int		check_if_dupl(t_stacks *st, int **srt)
 		j++;
 	}
 	return (1);
-}
-
-int		action(t_stacks *st, char *act, int fl)
-{
-	if (ft_memcmp(act, "sa", 2) == 0)
-		swap_in_stack(st, 'A');
-	else if (ft_memcmp(act, "sb", 2) == 0)
-		swap_in_stack(st, 'B');
-	else if (ft_memcmp(act, "ss", 2) == 0)
-		swap_both(st);
-	else if (ft_memcmp(act, "ra", 2) == 0)
-		rotate(st, 'A');
-	else if (ft_memcmp(act, "rb", 2) == 0)
-		rotate(st, 'B');
-	else if (ft_memcmp(act, "rra", 3) == 0)
-		reverse_rotate(st, 'A');
-	else if (ft_memcmp(act, "rrb", 3) == 0)
-		reverse_rotate(st, 'B');
-	else if (ft_memcmp(act, "rrr", 3) == 0)
-		reverse_rotate_both(st);
-	else if (ft_memcmp(act, "rr", 2) == 0)
-		rotate_both(st);
-	else if (ft_memcmp(act, "pa", 2) == 0)
-		push_1_to_2(st, 'B');
-	else if (ft_memcmp(act, "pb", 2) == 0)
-		push_1_to_2(st, 'A');
-	else
-		return (0);
-	return (put_action(st, act, fl));
 }

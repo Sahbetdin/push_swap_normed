@@ -12,14 +12,6 @@
 
 #include "ps_header.h"
 
-void	set_first_info(t_info *pc, int n)
-{
-	pc->begin = 0;
-	pc->end = n;
-	pc->amount = pc->end - pc->begin;
-	pc->lt = 'A';
-}
-
 void	divide_piece_info(t_info *pc, int flag)
 {
 	int		mid;
@@ -47,7 +39,6 @@ void	free_stacks(t_stacks *st)
 {
 	free(st->a);
 	free(st->b);
-	free(st);
 }
 
 /*

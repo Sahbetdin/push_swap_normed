@@ -25,19 +25,19 @@ void	set_arr_to_zero(int *b, int n)
 ** this function is used by the next one for parsing sth like " 3 4 1  "
 */
 
-int		parse_complicated(int ac, char **av, t_stacks **st)
+int		parse_complicated(int ac, char **av, t_stacks *st)
 {
 	int		i;
 	int		j;
 	char	*trimi;
 	int		n;
 
-	i = 1;
+	i = st->start_arg;
 	j = 0;
 	while (i < ac)
 	{
 		trimi = ft_strtrim(av[i]);
-		if (parse_all_args((*st), trimi, &j, &n) == -2)
+		if (parse_all_args(st, trimi, &j, &n) == -2)
 		{
 			free(trimi);
 			return (-2);
@@ -54,27 +54,25 @@ int		parse_complicated(int ac, char **av, t_stacks **st)
 ** 3. parse arguments
 */
 
-int		set_st_a(int ac, char **av, t_stacks **st, int **sorted)
+int		set_st_a(int ac, char **av, t_stacks *st, int **sorted)
 {
 	int		cnt;
 	int		tmp;
 
-	tmp = check_if_num_backsp(ac, av);
+	tmp = check_if_num_backsp(ac, av, st->start_arg);
 	if (tmp == 0)
 		return (-1);
 	else if (tmp == -1)
 		return (-4);
-	if (!(*st = (t_stacks *)malloc(sizeof(t_stacks))))
-		return (0);
-	if ((cnt = amount_of_numb(ac, av)) != -1)
-		(*st)->n = cnt;
+	if ((cnt = amount_of_numb(ac, av, st->start_arg)) != -1)
+		st->n = cnt;
 	else
 		return (0);
-	if (!((*st)->a = (int *)malloc(sizeof(int) * (*st)->n)))
+	if (!(st->a = (int *)malloc(sizeof(int) * st->n)))
 		return (0);
 	if (parse_complicated(ac, av, st) == -2)
 		return (-2);
-	if (check_if_dupl(*st, sorted) == -3)
+	if (check_if_dupl(st, sorted) == -3)
 		return (-3);
 	return (1);
 }

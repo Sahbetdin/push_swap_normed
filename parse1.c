@@ -16,8 +16,6 @@ int		free_st_a_overflaw(t_stacks *st)
 {
 	free(st->a);
 	st->a = NULL;
-	free(st);
-	st = NULL;
 	return (-2);
 }
 
@@ -70,13 +68,13 @@ int		amount_of_numb_in_one_av(char *str)
 ** returns total amount of numbers
 */
 
-int		amount_of_numb(int ac, char **av)
+int		amount_of_numb(int ac, char **av, int start_av)
 {
 	int		i;
 	int		curr;
 	int		amount;
 
-	i = 1;
+	i = start_av;
 	amount = 0;
 	while (i < ac)
 	{

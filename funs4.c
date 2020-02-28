@@ -62,16 +62,6 @@ void	check_first_element(t_stacks *st, t_info *pc0, int *sorted)
 	}
 }
 
-void	sort_234(t_stacks *st, t_info *pc_i, int *sorted)
-{
-	if (pc_i->amount == 2)
-		sort_2_elements(st, pc_i);
-	else if (pc_i->amount == 3)
-		sort_3_elements(st, pc_i, sorted);
-	else if (pc_i->amount == 4)
-		sort_4_elements(st, pc_i, sorted);
-}
-
 void	rotate_back_stacks(t_stacks *st, t_info *pc_i, int rot_cnt, int flag)
 {
 	while (rot_cnt > 0 && flag == 1)

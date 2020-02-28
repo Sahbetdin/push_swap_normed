@@ -18,8 +18,6 @@ void	free_stacks_after_success(t_stacks *st, t_info *pc, int *srt, int *num)
 	free(st->b);
 	st->a = NULL;
 	st->b = NULL;
-	free(st);
-	st = NULL;
 	free(srt);
 	srt = NULL;
 	free(num);
@@ -34,8 +32,6 @@ void	free_stacks_after_checker(t_stacks *st, int *srt)
 	free(st->b);
 	st->a = NULL;
 	st->b = NULL;
-	free(st);
-	st = NULL;
 	free(srt);
 	srt = NULL;
 }
@@ -71,9 +67,6 @@ int		if_allocated_b(t_stacks *st)
 		st->b = NULL;
 		free(st->a);
 		st->a = NULL;
-		free(st);
-		free(st);
-		st = NULL;
 		return (0);
 	}
 	return (1);

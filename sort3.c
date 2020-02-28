@@ -26,57 +26,26 @@ void	sort_top_top(t_stacks *st)
 	}
 }
 
-//previous
-// void	sort_3_a_alone(t_stacks *st, t_info *pc0, int *srt)
-// {
-// 	if (st->a[st->pa] < st->a[st->pa + 2] && st->a[st->pa + 2] <
-// 	st->a[st->pa + 1])
-// 	{
-// 		action(st, "rra", 1);
-// 		action(st, "sa", 1);
-// 	}
-// 	else if (st->a[st->pa + 1] == srt[pc0->begin])
-// 	{
-// 		if (st->a[st->pa] < st->a[st->pa + 2])
-// 			action(st, "sa", 1);
-// 		else if (st->a[st->pa] > st->a[st->pa + 2])
-// 			action(st, "ra", 1);
-// 	}
-// 	else if (st->a[st->pa + 2] == srt[pc0->begin])
-// 	{
-// 		if (st->a[st->pa] < st->a[st->pa + 1])
-// 			action(st, "rra", 1);
-// 		else if (st->a[st->pa] > st->a[st->pa + 1])
-// 			sa_rra(st);
-// 	}
-// }
-
 void	sort_3_a_alone(t_stacks *st, int *srt)
 {
-	print_arrays(st);
-	if (st->a[st->pa] < st->a[st->pa + 2] && st->a[st->pa + 2] <
-	st->a[st->pa + 1])
-	{
-		action(st, "rra", 1);
+	if (st->a[st->pa] == srt[1] && st->a[st->pa + 1] == srt[0])
 		action(st, "sa", 1);
-	}
-	else if (st->a[st->pa + 1] == srt[0])
+	else if (st->a[st->pa + 1] == srt[0] && st->a[st->pa + 2] == srt[1])
+		action(st, "ra", 1);
+	else if (st->a[st->pa + 2] == srt[0] && st->a[st->pa] == srt[1])
+		action(st, "rra", 1);
+	else if (st->a[st->pa + 2] == srt[0] && st->a[st->pa + 1] == srt[1])
 	{
-		if (st->a[st->pa] < st->a[st->pa + 2])
-			action(st, "sa", 1);
-		else if (st->a[st->pa] > st->a[st->pa + 2])
-			action(st, "ra", 1);
+		action(st, "sa", 1);
+		action(st, "rra", 1);
 	}
-	else if (st->a[st->pa + 2] == srt[0])
+	else if (st->a[st->pa] == srt[0] && st->a[st->pa + 2] == srt[1])
 	{
-		if (st->a[st->pa] < st->a[st->pa + 1])
-			action(st, "rra", 1);
-		else if (st->a[st->pa] > st->a[st->pa + 1])
-			sa_rra(st);
+		action(st, "pb", 1);
+		action(st, "sa", 1);
+		action(st, "pa", 1);
 	}
 }
-
-
 
 void	sort_3_a_not_alone(t_stacks *st, t_info *pc0, int *srt)
 {
@@ -126,7 +95,6 @@ void	sort_3_b(t_stacks *st, t_info *pc0, int *srt)
 void	sort_3_elements(t_stacks *st, t_info *pc0, int *srt)
 {
 	if (pc0->lt == 'A' && pc0->amount + st->pa == st->n)
-		// sort_3_a_alone(st, pc0, srt); //prev
 		sort_3_a_alone(st, srt);
 	else if (pc0->lt == 'A')
 		sort_3_a_not_alone(st, pc0, srt);

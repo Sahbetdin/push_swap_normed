@@ -41,11 +41,3 @@ void	reverse_rotate_both(t_stacks *st)
 	reverse_rotate(st, 'A');
 	reverse_rotate(st, 'B');
 }
-
-int		put_action(t_stacks *st, char *act, int flag)
-{
-	if (flag == 1)
-		ft_putendl(act);
-	st->oper++;
-	return (1);
-}

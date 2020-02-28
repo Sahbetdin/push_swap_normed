@@ -25,6 +25,7 @@ typedef struct	s_stacks
 	int			pb;
 	int			n;
 	int			oper;
+	int			start_arg;
 }				t_stacks;
 
 typedef struct	s_info
@@ -51,7 +52,7 @@ void			sa_rra(t_stacks *st);
 
 int				inside_number_sth_bad(char *av_i);
 int				av_i_has_digit(char *av_i);
-int				check_if_num_backsp(int ac, char **av);
+int				check_if_num_backsp(int ac, char **av, int start_av);
 int				check_if_dupl(t_stacks *st, int **srt);
 int				action(t_stacks *st, char *act, int fl);
 
@@ -121,7 +122,7 @@ char			*ft_atoi_backsp(const char *str, int *p_numb, int *n);
 int				free_st_a_overflaw(t_stacks *st);
 int				*make_me_sorted(t_stacks *st);
 int				amount_of_numb_in_one_av(char *str);
-int				amount_of_numb(int ac, char **av);
+int				amount_of_numb(int ac, char **av, int start_av);
 
 /*
 ** parse2.c
@@ -150,8 +151,8 @@ void			process_stacks(t_stacks *st, t_info *pc, int *sorted, int *num);
 */
 
 void			set_arr_to_zero(int *b, int n);
-int				parse_complicated(int ac, char **av, t_stacks **st);
-int				set_st_a(int ac, char **av, t_stacks **st, int **sorted);
+int				parse_complicated(int ac, char **av, t_stacks *st);
+int				set_st_a(int ac, char **av, t_stacks *st, int **sorted);
 int				set_st_b(t_stacks *st);
 
 /*
@@ -168,9 +169,7 @@ void			sort_4_elements(t_stacks *st, t_info *pc0, int *srt);
 */
 
 void			sort_top_top(t_stacks *st);
-//void			sort_3_a_alone(t_stacks *st, t_info *pc0, int *srt);
-void	sort_3_a_alone(t_stacks *st, int *srt);
-
+void			sort_3_a_alone(t_stacks *st, int *srt);
 void			sort_3_a_not_alone(t_stacks *st, t_info *pc0, int *srt);
 void			sort_3_b(t_stacks *st, t_info *pc0, int *srt);
 void			sort_3_elements(t_stacks *st, t_info *pc0, int *srt);
@@ -182,7 +181,7 @@ void			sort_3_elements(t_stacks *st, t_info *pc0, int *srt);
 void			rra_sa(t_stacks *st);
 void			pb_2(t_stacks *st);
 void			zerofy_piece(t_info *pc0);
-void			sort_4_only(t_stacks *st, int *srt);
+void			sort_4_alone(t_stacks *st, int *srt);
 void			sort_3_for_4(t_stacks *st, int min2);
 
 /*

@@ -47,13 +47,13 @@ int		*sort_array(int *arr, int n)
 
 void	push_1_to_2(t_stacks *st, char c)
 {
-	if (c == 'A')
+	if (c == 'A' && st->pa < st->n)
 	{
 		st->b[st->pb] = st->a[st->pa];
 		st->pa++;
 		st->pb--;
 	}
-	else if (c == 'B')
+	else if (c == 'B' && st->pb < st->n - 1)
 	{
 		st->pa--;
 		st->pb++;
@@ -70,7 +70,7 @@ void	rotate(t_stacks *st, char c)
 	int tmp;
 	int i;
 
-	if (c == 'A')
+	if (c == 'A' && st->pa < st->n - 1)
 	{
 		tmp = st->a[st->pa];
 		i = st->pa - 1;
@@ -78,7 +78,7 @@ void	rotate(t_stacks *st, char c)
 			st->a[i] = st->a[i + 1];
 		st->a[i] = tmp;
 	}
-	else if (c == 'B')
+	else if (c == 'B' && st->pb < st->n - 2)
 	{
 		tmp = st->b[st->pb + 1];
 		i = st->pb;
@@ -94,7 +94,7 @@ void	reverse_rotate(t_stacks *st, char c)
 	int i;
 
 	i = st->n - 1;
-	if (c == 'A')
+	if (c == 'A' && st->pa < st->n - 1)
 	{
 		tmp = st->a[i];
 		while (i > st->pa)
@@ -104,7 +104,7 @@ void	reverse_rotate(t_stacks *st, char c)
 		}
 		st->a[st->pa] = tmp;
 	}
-	else if (c == 'B')
+	else if (c == 'B' && st->pb < st->n - 2)
 	{
 		tmp = st->b[i];
 		while (i > st->pb + 1)

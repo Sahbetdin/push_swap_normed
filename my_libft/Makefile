@@ -45,7 +45,7 @@ $(NAME): $(OBJ)
 	@ranlib $(NAME)
 	@echo $(WHITE_B) Libft created. $(WHITE)
 		
-%.o: %.c
+%.o: %.c $(HEAD)
 	@$(CC) $(CFLAGS) -c $< -o $@ -I.$(HEAD) 
 	@echo Libft: $(GREEN) $< $(WHITE)
 

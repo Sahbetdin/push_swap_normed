@@ -17,7 +17,7 @@ int		active_piece(t_info *pc)
 	int i;
 
 	i = 1;
-	while (i < 200)
+	while (i < 199)
 	{
 		if (pc[i].amount != 0 && pc[i + 1].amount == 0)
 			break ;
@@ -95,14 +95,35 @@ void	sort_5(t_stacks *st, int *srt)
 {
 	if (st->a[st->pa + 1] == srt[0])
 		action(st, "sa", 1);
-	if (st->a[st->pa] == srt[0])
+	else if (st->a[st->pa + 2] == srt[0])
+	{
+		action(st, "ra", 1);
+		action(st, "ra", 1);
+	}
+	else if (st->a[st->pa + 3] == srt[0])
+	{
+		action(st, "rra", 1);
+		action(st, "rra", 1);
+	}
+	else if (st->a[st->pa + 4] == srt[0])
+		action(st, "rra", 1);
+	if (st->a[st->pa] == srt[0] && check_stacks(st) == 0)
 	{
 		action(st, "pb", 1);
-		sort_4_only(st, srt);
+		sort_4_alone(st, srt + 1);
 		action(st, "pa", 1);
 	}
 }
 
+void	sort_234(t_stacks *st, t_info *pc_i, int *sorted)
+{
+	if (pc_i->amount == 2)
+		sort_2_elements(st, pc_i);
+	else if (pc_i->amount == 3)
+		sort_3_elements(st, pc_i, sorted);
+	else if (pc_i->amount == 4)
+		sort_4_elements(st, pc_i, sorted);
+}
 
 /*
 ** num[0] = j; num[1] = count; num[2] = rot_cnt; num[3] = need_to_push;
@@ -113,16 +134,15 @@ void	process_stacks(t_stacks *st, t_info *pc, int *sorted, int *num)
 {
 	int i;
 
-//возвр i 
 	if (st->n == 5)
 	{
-		sort_5(st, sorted);	
+		sort_5(st, sorted);
+		return ;
 	}
 	i = -1;
 	while (++i < 8)
 		num[i] = 0;
 	i = active_piece(pc);
-
 	if (pc[i].amount > 4)
 	{
 		num[1] = pc[i].amount;

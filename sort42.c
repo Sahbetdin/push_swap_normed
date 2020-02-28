@@ -51,7 +51,6 @@ void	sort_4_st_pa_2(t_stacks *st, t_info *pc0, int *srt)
 	else if (st->b[st->pb + 1] == srt[pc0->begin + 1])
 	{
 		pa_ra(st);
-		print_piece(*pc0);
 		change_piece_beg_am(pc0, 2);
 		sort_2_elements(st, pc0);
 	}

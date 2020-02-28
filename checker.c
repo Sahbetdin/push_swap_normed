@@ -20,6 +20,20 @@ void	if_ok(int i)
 		write(1, "KO\n", 3);
 }
 
+int		validate_action(char *s)
+{
+	if (
+	((ft_memcmp(s, "sa", 2) == 0 || ft_memcmp(s, "sb", 2) == 0 ||
+	ft_memcmp(s, "ss", 2) == 0 || ft_memcmp(s, "ra", 2) == 0 ||
+	ft_memcmp(s, "rb", 2) == 0 || ft_memcmp(s, "rr", 2) == 0 ||
+	ft_memcmp(s, "pa", 2) == 0 || ft_memcmp(s, "pb", 2) == 0) &&
+	ft_strlen(s) == 2) || ((ft_memcmp(s, "rrb", 3) == 0 ||
+	ft_memcmp(s, "rrr", 3) == 0 || ft_memcmp(s, "rra", 3) == 0) &&
+	ft_strlen(s) == 3))
+		return (1);
+	return (0);
+}
+
 void	run_gnl(t_stacks *st)
 {
 	char	*s;
@@ -27,10 +41,13 @@ void	run_gnl(t_stacks *st)
 
 	while (get_next_line(0, &s) > 0)
 	{
+		if (validate_action(s) == 0)
+		{
+			ft_printf("Error in input. Try again.\n");
+			free(s);
+			continue ;
+		}
 		res = action(st, s, 0);
-		if (res != 1)
-			exit(1);
-			// write(1, "BAD INPUT\n", 10);
 		free(s);
 	}
 	free(s);
@@ -38,23 +55,22 @@ void	run_gnl(t_stacks *st)
 
 int		main(int ac, char **av)
 {
-	t_stacks	*st;
+	t_stacks	st;
 	int			*sorted;
 	int			res;
 
 	if (ac == 1)
 		return (0);
-	st = NULL;
 	res = set_st_a(ac, av, &st, &sorted);
 	if (bad_input(res) == 0)
 		return (0);
-	if (if_allocated_b(st) == 0)
+	if (if_allocated_b(&st) == 0)
 	{
 		free(sorted);
 		return (0);
 	}
-	run_gnl(st);
-	if_ok(check_stacks(st));
-	free_stacks_after_checker(st, sorted);
+	run_gnl(&st);
+	if_ok(check_stacks(&st));
+	free_stacks_after_checker(&st, sorted);
 	return (0);
 }
