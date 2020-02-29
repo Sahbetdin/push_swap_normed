@@ -71,7 +71,7 @@ void			reverse_rotate(t_stacks *st, char c);
 */
 
 void			set_first_info(t_info *pc, int n);
-void			divide_piece_info(t_info *pc, int flag);
+void			divide_piece_info(t_info *pc, int flag1);
 void			free_stacks(t_stacks *st);
 int				check_stacks(t_stacks *st);
 void			change_piece_beg_am(t_info *pc0, int delta);
@@ -194,4 +194,8 @@ void			sort_4_st_pa_2(t_stacks *st, t_info *pc0, int *srt);
 void			sort_4_st_pa_3(t_stacks *st, t_info *pc0, int *srt, \
 				int *addr_flag);
 void			sort_4_st_pb_3(t_stacks *st, t_info *pc0, int *srt);
+int				validate_action(char *s);
+void			if_ok(int i);
+void			run_gnl(t_stacks *st);
+int				malloc_pc(t_stacks *st, t_info **pc);
 #endif

@@ -21,6 +21,7 @@ void	ft_swap(int *a, int *b)
 	*b = c;
 }
 
+
 int		*sort_array(int *arr, int n)
 {
 	int i;
@@ -41,77 +42,24 @@ int		*sort_array(int *arr, int n)
 	return (arr);
 }
 
-/*
-** push from whatever in c is.
-*/
-
-void	push_1_to_2(t_stacks *st, char c)
+int		*make_me_sorted(t_stacks *st)
 {
-	if (c == 'A' && st->pa < st->n)
-	{
-		st->b[st->pb] = st->a[st->pa];
-		st->pa++;
-		st->pb--;
-	}
-	else if (c == 'B' && st->pb < st->n - 1)
-	{
-		st->pa--;
-		st->pb++;
-		st->a[st->pa] = st->b[st->pb];
-	}
+	int		*sorted;
+	int		i;
+
+	sorted = (int *)malloc(sizeof(int) * st->n);
+	i = -1;
+	while (++i < st->n)
+		sorted[i] = st->a[i];
+	sort_array(sorted, st->n);
+	return (sorted);
 }
 
-/*
-** rotate what in c is
-*/
 
-void	rotate(t_stacks *st, char c)
+void	if_ok(int i)
 {
-	int tmp;
-	int i;
-
-	if (c == 'A' && st->pa < st->n - 1)
-	{
-		tmp = st->a[st->pa];
-		i = st->pa - 1;
-		while (++i < st->n - 1)
-			st->a[i] = st->a[i + 1];
-		st->a[i] = tmp;
-	}
-	else if (c == 'B' && st->pb < st->n - 2)
-	{
-		tmp = st->b[st->pb + 1];
-		i = st->pb;
-		while (++i < st->n - 1)
-			st->b[i] = st->b[i + 1];
-		st->b[i] = tmp;
-	}
-}
-
-void	reverse_rotate(t_stacks *st, char c)
-{
-	int tmp;
-	int i;
-
-	i = st->n - 1;
-	if (c == 'A' && st->pa < st->n - 1)
-	{
-		tmp = st->a[i];
-		while (i > st->pa)
-		{
-			st->a[i] = st->a[i - 1];
-			i--;
-		}
-		st->a[st->pa] = tmp;
-	}
-	else if (c == 'B' && st->pb < st->n - 2)
-	{
-		tmp = st->b[i];
-		while (i > st->pb + 1)
-		{
-			st->b[i] = st->b[i - 1];
-			i--;
-		}
-		st->b[st->pb + 1] = tmp;
-	}
+	if (i == 1)
+		write(1, "OK\n", 3);
+	else
+		write(1, "KO\n", 3);
 }

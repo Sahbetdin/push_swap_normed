@@ -1,17 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   checker.c                                          :+:      :+:    :+:   */
+/*   visual.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: btrifle <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/24 17:05:41 by btrifle           #+#    #+#             */
-/*   Updated: 2020/02/24 17:05:43 by btrifle          ###   ########.fr       */
+/*   Created: 2020/02/29 15:24:14 by btrifle           #+#    #+#             */
+/*   Updated: 2020/02/29 15:24:25 by btrifle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ps_header.h"
 
+void	run_gnl_in_visual(t_stacks *st)
+{
+	char		*s;
+	int			res;
+
+	while (get_next_line(0, &s) > 0)
+	{
+		res = action(st, s, 0);
+		free(s);
+		system("clear");
+		print_arrays(st);
+		system("sleep 0.5");
+	}
+	free(s);
+}
 
 int		main(int ac, char **av)
 {
@@ -33,8 +48,7 @@ int		main(int ac, char **av)
 		free(sorted);
 		return (0);
 	}
-	run_gnl(&st);
-	if_ok(check_stacks(&st));
+	run_gnl_in_visual(&st);
 	free_stacks_after_checker(&st, sorted);
 	return (0);
 }

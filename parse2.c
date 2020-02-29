@@ -12,35 +12,8 @@
 
 #include "ps_header.h"
 
-void	free_stacks_after_success(t_stacks *st, t_info *pc, int *srt, int *num)
-{
-	free(st->a);
-	free(st->b);
-	st->a = NULL;
-	st->b = NULL;
-	free(srt);
-	srt = NULL;
-	free(num);
-	num = NULL;
-	free(pc);
-	pc = NULL;
-}
-
-void	free_stacks_after_checker(t_stacks *st, int *srt)
-{
-	free(st->a);
-	free(st->b);
-	st->a = NULL;
-	st->b = NULL;
-	free(srt);
-	srt = NULL;
-}
-
 int		bad_input(int res)
 {
-	int g;
-
-	g = 0;
 	if (res == 0)
 		ft_printf("Malloc error in 'a'\n");
 	else if (res == -1)

@@ -74,8 +74,10 @@ int		check_if_num_backsp(int ac, char **av, int start_av)
 	int j;
 
 	i = start_av;
+	// ft_printf("i = %d\n", i);
 	while (i < ac)
 	{
+		
 		j = 0;
 		while (av[i][j] != '\0')
 		{

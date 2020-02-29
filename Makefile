@@ -2,9 +2,10 @@
 CHECKER_NAME = checker
 PS_NAME = push_swap
 NAME = $(PS_NAME) $(CHECKER_NAME)
+VIS_NAME = visual
 
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror
 
 SRC = procedure.c parse1.c parse2.c ft_atoi_backsp.c \
 	act1.c act2.c funs1.c funs2.c funs3.c funs4.c \
@@ -39,13 +40,19 @@ $(OBJECTS): %.o: %.c $(HEADER)
 $(LIBFT): FAKE
 		@$(MAKE) -C $(LIBFT_PATH)
 
+visual:	$(OBJECTS) visual.c
+		@$(CC) $(CFLAGS) -o $(VIS_NAME) visual.c $(OBJECTS) -I $(LIBFT_PATH) -L $(LIBFT_PATH) -lft
+		@echo $(WHITE_B) visualization $(WHITE)created.
+
 clean:
 		@/bin/rm -f *.o
-#		@$(MAKE) -C $(LIBFT_PATH) clean
+		@$(MAKE) -C $(LIBFT_PATH) clean
+		@echo $(WHITE_B) push_swap and checker files deleted!$(WHITE)
 
 fclean: clean
 		@/bin/rm -f $(PS_NAME)
 		@/bin/rm -f $(CHECKER_NAME)
-#		@$(MAKE) -C $(LIBFT_PATH) fclean
+		@$(MAKE) -C $(LIBFT_PATH) fclean
+
 
 re: fclean all

@@ -12,25 +12,31 @@
 
 #include "ps_header.h"
 
-int		free_st_a_overflaw(t_stacks *st)
+
+
+
+int		parse_all_args(t_stacks *st, char *ptr, int *j_addr, int *n_addr)
 {
-	free(st->a);
-	st->a = NULL;
-	return (-2);
+	if (ft_strchr(ptr, ' '))
+	{
+		while (ptr != NULL && *ptr != '\0')
+		{
+			ptr = ft_atoi_backsp(ptr, st->a + *j_addr, n_addr);
+			if (*n_addr == -1)
+				return (free_st_a_overflaw(st));
+			(*j_addr)++;
+		}
+	}
+	else
+	{
+		ptr = ft_atoi_backsp(ptr, st->a + *j_addr, n_addr);
+		if (*n_addr == -1)
+			return (free_st_a_overflaw(st));
+		(*j_addr)++;
+	}
+	return (1);
 }
 
-int		*make_me_sorted(t_stacks *st)
-{
-	int		*sorted;
-	int		i;
-
-	sorted = (int *)malloc(sizeof(int) * st->n);
-	i = -1;
-	while (++i < st->n)
-		sorted[i] = st->a[i];
-	sort_array(sorted, st->n);
-	return (sorted);
-}
 
 /*
 ** returns amount of numbers in av[i]

@@ -25,6 +25,7 @@ void	print_arrays(t_stacks *st)
 {
 	int i;
 
+	ft_printf("\033[0;33m\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n\033[0m");
 	ft_printf("\033[0;36m a:       \033[0m");
 	ft_printf("%3d,", st->pa);
 	i = st->pa - 1;
@@ -36,7 +37,7 @@ void	print_arrays(t_stacks *st)
 	i = st->pb;
 	while (++i < st->n)
 		ft_printf("%4d", st->b[i]);
-	ft_printf("\033[0;33m \n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n \033[0m");
+	ft_printf("\033[0;33m\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n\033[0m");
 }
 
 /*

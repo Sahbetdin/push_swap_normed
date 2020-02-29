@@ -12,20 +12,6 @@
 
 #include "ps_header.h"
 
-int		active_piece(t_info *pc)
-{
-	int i;
-
-	i = 1;
-	while (i < 199)
-	{
-		if (pc[i].amount != 0 && pc[i + 1].amount == 0)
-			break ;
-		i++;
-	}
-	return (i);
-}
-
 void	process_more_than_4_a(t_stacks *st, t_info *pc_i, int *srt, int *num)
 {
 	if (is_pb(st, pc_i, srt, num[5]))
@@ -60,7 +46,7 @@ void	process_cycle(t_stacks *st, t_info *pc_i, int *sorted, int *num)
 			process_more_than_4_a(st, pc_i, sorted, num);
 		else if (pc_i->lt == 'B')
 		{
-			if (st->b[st->pb + 1] >= sorted[(pc_i + 2)->begin] &&
+			if (st->b[st->pb + 1] >= sorted[(pc_i + 1)->begin] &&
 				st->b[st->pb + 1] < sorted[(pc_i + 1)->end])
 			{
 				num[7]++;
@@ -91,30 +77,6 @@ void	check_if_b_empty(t_info *pc_i_1, int *num)
 		num[3] = pc_i_1->amount;
 }
 
-void	sort_5(t_stacks *st, int *srt)
-{
-	if (st->a[st->pa + 1] == srt[0])
-		action(st, "sa", 1);
-	else if (st->a[st->pa + 2] == srt[0])
-	{
-		action(st, "ra", 1);
-		action(st, "ra", 1);
-	}
-	else if (st->a[st->pa + 3] == srt[0])
-	{
-		action(st, "rra", 1);
-		action(st, "rra", 1);
-	}
-	else if (st->a[st->pa + 4] == srt[0])
-		action(st, "rra", 1);
-	if (st->a[st->pa] == srt[0] && check_stacks(st) == 0)
-	{
-		action(st, "pb", 1);
-		sort_4_alone(st, srt + 1);
-		action(st, "pa", 1);
-	}
-}
-
 void	sort_234(t_stacks *st, t_info *pc_i, int *sorted)
 {
 	if (pc_i->amount == 2)
@@ -134,14 +96,8 @@ void	process_stacks(t_stacks *st, t_info *pc, int *sorted, int *num)
 {
 	int i;
 
-	if (st->n == 5)
-	{
-		sort_5(st, sorted);
+	if (if_sort_5_alone(st, sorted, num) == 0)
 		return ;
-	}
-	i = -1;
-	while (++i < 8)
-		num[i] = 0;
 	i = active_piece(pc);
 	if (pc[i].amount > 4)
 	{
