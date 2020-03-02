@@ -37,14 +37,23 @@ int		*cycle_in_atoi_backsp(const char *str, int *a_r, int *n, int *a_i)
 ** we return anything except NULL in case of success
 */
 
-int		*str_end_in_atoi_backsp(const char *str_i, int *n)
+int		str_end_in_atoi_backsp(const char *str_i, int *n)
 {
+	int kk;
+
 	if (str_i == '\0')
 	{
 		*n = 0;
-		return (NULL);
+		return (-1);
 	}
-	return (n);
+	kk = 0;
+	while (str_i[kk])
+	{
+		if (str_i[kk] == ' ')
+			break ;
+		kk++;
+	}
+	return (kk);
 }
 
 /*
@@ -58,6 +67,7 @@ char	*ft_atoi_backsp(const char *str, int *p_numb, int *n)
 	int	i;
 	int	res;
 	int	sign;
+	int	kk;
 
 	res = 0;
 	sign = 1;
@@ -69,13 +79,14 @@ char	*ft_atoi_backsp(const char *str, int *p_numb, int *n)
 	if (ft_strstr(str, "2147483648") && sign == -1)
 	{
 		*p_numb = -2147483648;
+		*n = 1;
 		return ((char *)str + i + 10);
 	}
 	if (!(cycle_in_atoi_backsp(str, &res, n, &i)))
 		return (NULL);
 	*p_numb = sign * res;
-	if (!(str_end_in_atoi_backsp(str + i, n)))
+	if ((kk = str_end_in_atoi_backsp(str + i, n)) == -1)
 		return (NULL);
 	*n = 1;
-	return ((char *)str + i);
+	return ((char *)str + i + kk);
 }

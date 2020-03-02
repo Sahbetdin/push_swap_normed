@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   stack_op02.c                                       :+:      :+:    :+:   */
+/*   stack_op1.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: btrifle <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,8 +10,19 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "ps_header.h"
+
+void	rra_sa(t_stacks *st)
+{
+	action(st, "rra", 1);
+	action(st, "sa", 1);
+}
+
+void	pb_2(t_stacks *st)
+{
+	action(st, "pb", 1);
+	action(st, "pb", 1);
+}
 
 int		put_action(t_stacks *st, char *act, int flag)
 {

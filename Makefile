@@ -7,9 +7,9 @@ VIS_NAME = visual
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 
-SRC = procedure.c parse1.c parse2.c ft_atoi_backsp.c \
-	act1.c act2.c funs1.c funs2.c funs3.c funs4.c \
-	sort2.c set.c sort3.c sort41.c sort42.c fun_print.c check_conditions.c
+SRC =	check_conditions.c free1.c ft_atoi_backsp.c fun_print.c funs1.c \
+		parse1.c piece_op1.c set.c sort2.c sort3.c sort41.c sort42.c \
+		sort5.c stack_op0.c stack_op1.c stack_op2.c stack_op3.c stack_op4.c stack_op5.c	   
 
 OBJECTS = $(patsubst %.c, %.o, $(SRC))
 
@@ -25,11 +25,13 @@ WHITE = "\033[0m"
 
 .PHONY: all clean fclean re FAKE
 
-all: $(NAME)
+all: $(CHECKER_NAME) $(PS_NAME)
 
-$(NAME): $(LIBFT) $(OBJECTS) push_swap.c checker.c
+$(PS_NAME): $(LIBFT) $(OBJECTS) push_swap.c
 		@$(CC) $(CFLAGS) -o $(PS_NAME) push_swap.c $(OBJECTS) -I $(LIBFT_PATH) -L $(LIBFT_PATH) -lft
-		@echo $(WHITE_B) push_swap $(WHITE)created. 
+		@echo $(WHITE_B) push_swap $(WHITE)created.
+
+$(CHECKER_NAME): $(LIBFT) $(OBJECTS) checker.c
 		@$(CC) $(CFLAGS) -o $(CHECKER_NAME) checker.c $(OBJECTS) -I $(LIBFT_PATH) -L $(LIBFT_PATH) -lft
 		@echo $(WHITE_B) checker $(WHITE)created. 
 
@@ -40,7 +42,7 @@ $(OBJECTS): %.o: %.c $(HEADER)
 $(LIBFT): FAKE
 		@$(MAKE) -C $(LIBFT_PATH)
 
-visual:	$(OBJECTS) visual.c
+visual:	$(OBJECTS) $(LIBFT) visual.c
 		@$(CC) $(CFLAGS) -o $(VIS_NAME) visual.c $(OBJECTS) -I $(LIBFT_PATH) -L $(LIBFT_PATH) -lft
 		@echo $(WHITE_B) visualization $(WHITE)created.
 
@@ -52,7 +54,7 @@ clean:
 fclean: clean
 		@/bin/rm -f $(PS_NAME)
 		@/bin/rm -f $(CHECKER_NAME)
+		@/bin/rm -f visual
 		@$(MAKE) -C $(LIBFT_PATH) fclean
-
 
 re: fclean all

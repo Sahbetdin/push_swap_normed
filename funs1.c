@@ -21,6 +21,9 @@ void	ft_swap(int *a, int *b)
 	*b = c;
 }
 
+/*
+** insertion sort algorithm
+*/
 
 int		*sort_array(int *arr, int n)
 {
@@ -54,7 +57,6 @@ int		*make_me_sorted(t_stacks *st)
 	sort_array(sorted, st->n);
 	return (sorted);
 }
-
 
 void	if_ok(int i)
 {

@@ -15,10 +15,20 @@
 int		malloc_pc(t_stacks *st, t_info **pc)
 {
 	int			n;
+	int			i;
 
 	n = 200;
 	if (!(*pc = (t_info *)malloc(sizeof(t_info) * 200)))
 		return (0);
+	i = 0;
+	while (i < 199)
+	{
+		(*pc)[i].begin = 0;
+		(*pc)[i].end = 0;
+		(*pc)[i].amount = 0;
+		(*pc)[i].lt = 0;
+		i++;
+	}
 	set_first_info(*pc, st->n);
 	set_pc_remaining(*pc);
 	return (1);

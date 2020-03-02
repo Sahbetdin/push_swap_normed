@@ -12,6 +12,24 @@
 
 #include "ps_header.h"
 
+void	set_start_arg(t_stacks *st, char **av)
+{
+	if (av[1][0] == '-' && av[1][1] == 'c')
+		st->start_arg = 2;
+	else
+		st->start_arg = 1;
+}
+
+int		check_b_allocation(t_stacks *st, int *srt)
+{
+	if (if_allocated_b(st) == 0)
+	{
+		free(srt);
+		return (0);
+	}
+	return (1);
+}
+
 int		main(int ac, char **av)
 {
 	int			res;
@@ -22,18 +40,12 @@ int		main(int ac, char **av)
 
 	if (ac == 1)
 		return (0);
-	if (av[1][0] == '-' && av[1][1] == 'c')
-		st.start_arg = 2;
-	else
-		st.start_arg = 1;
+	set_start_arg(&st, av);
 	res = set_st_a(ac, av, &st, &sorted);
 	if (bad_input(res) == 0)
 		return (0);
-	if (if_allocated_b(&st) == 0)
-	{
-		free(sorted);
+	if (check_b_allocation(&st, sorted) == 0)
 		return (0);
-	}
 	if (malloc_pc(&st, &pc) == 0)
 		return (0);
 	if (!(num = (int *)malloc(sizeof(int) * 8)))
@@ -45,4 +57,3 @@ int		main(int ac, char **av)
 	free_stacks_after_success(&st, pc, sorted, num);
 	return (0);
 }
-

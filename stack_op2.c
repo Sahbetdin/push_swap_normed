@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   stack_op1.c                                        :+:      :+:    :+:   */
+/*   stack_op2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: btrifle <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -11,27 +11,6 @@
 /* ************************************************************************** */
 
 #include "ps_header.h"
-
-/*
-** if pa is 0 and st->a is sorted, then return 1
-** else return 0
-*/
-
-int		check_stacks(t_stacks *st)
-{
-	int i;
-
-	if (st->pa != 0)
-		return (0);
-	i = 0;
-	while (i < st->n - 1)
-	{
-		if (st->a[i] > st->a[i + 1])
-			return (0);
-		i++;
-	}
-	return (1);
-}
 
 /*
 ** push from whatever in c is.
@@ -108,7 +87,6 @@ void	reverse_rotate(t_stacks *st, char c)
 	}
 }
 
-
 int		validate_action(char *s)
 {
 	if (
@@ -122,5 +100,3 @@ int		validate_action(char *s)
 		return (1);
 	return (0);
 }
-
-

@@ -25,12 +25,6 @@ int		free_st_a_overflaw(t_stacks *st)
 	return (-2);
 }
 
-void	free_letters_s(char *letters, char *s)
-{
-	free(letters);
-	free(s);
-}
-
 void	free_stacks_after_success(t_stacks *st, t_info *pc, int *srt, int *num)
 {
 	free(st->a);

@@ -12,9 +12,6 @@
 
 #include "ps_header.h"
 
-
-
-
 int		parse_all_args(t_stacks *st, char *ptr, int *j_addr, int *n_addr)
 {
 	if (ft_strchr(ptr, ' '))
@@ -36,7 +33,6 @@ int		parse_all_args(t_stacks *st, char *ptr, int *j_addr, int *n_addr)
 	}
 	return (1);
 }
-
 
 /*
 ** returns amount of numbers in av[i]
@@ -91,4 +87,37 @@ int		amount_of_numb(int ac, char **av, int start_av)
 		i++;
 	}
 	return (amount);
+}
+
+int		bad_input(int res)
+{
+	if (res == 0)
+		ft_printf("Malloc error in 'a'\n");
+	else if (res == -1)
+		ft_printf("Error\n");
+	else if (res == -2)
+		ft_printf("Error\n");
+	else if (res == -3)
+		ft_printf("Error\n");
+	else if (res == -4)
+		ft_printf("Error\n");
+	if (res == 0 || res == -1 || res == -2 || res == -3 || res == -4)
+		return (0);
+	return (1);
+}
+
+int		if_allocated_b(t_stacks *st)
+{
+	int res;
+
+	res = set_st_b(st);
+	if (res == 0)
+	{
+		ft_printf("Malloc error in 'b'\n");
+		st->b = NULL;
+		free(st->a);
+		st->a = NULL;
+		return (0);
+	}
+	return (1);
 }
